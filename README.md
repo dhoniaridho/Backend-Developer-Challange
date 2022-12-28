@@ -3,8 +3,8 @@
 ### Requirement
 
 - [Nest JS](https://docs.nestjs.com/)
-- Docker and Docker Compose
 - Typeorm
+- PostgreSQL
 
 ### Challange
 
