@@ -5,6 +5,7 @@
 - [Nest JS](https://docs.nestjs.com/)
 - Typeorm
 - PostgreSQL
+- Docker
 
 ### Challange
 
@@ -13,6 +14,7 @@
 - Add validation when create user like **_Password Strong and validate Empty data_**
 - Authenticate User **Login** using **JWT**
 - Create profile end point for authenticated user
+- Dockerizing apps using docker-compose
 
 ### Result
 
