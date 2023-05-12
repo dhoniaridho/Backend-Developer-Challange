@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+    nestjs:
+        build: .
+        ports:
+            - '3000:3000'
+        depends_on:
+            - db
+        environment:
+            - DATABASE_HOST=db
+            - DATABASE_PORT=5432
+            - DATABASE_USERNAME=postgres
+            - DATABASE_PASSWORD=postgres
+            - DATABASE_NAME=nestjs_db
+        restart: always
+
+    db:
+        image: postgres
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=nestjs_db
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+
+volumes:
+    postgres-data:
