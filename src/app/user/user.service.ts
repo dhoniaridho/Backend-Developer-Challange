@@ -10,7 +10,11 @@ import { USER_REPOSITORY, User } from './entities';
 import { IsNull, Repository } from 'typeorm';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { hashPassword } from 'src/common';
-
+import {
+    paginate,
+    Pagination,
+    IPaginationOptions,
+} from 'nestjs-typeorm-paginate';
 @Injectable()
 export class UserService {
     constructor(
@@ -18,12 +22,19 @@ export class UserService {
         private readonly userRepository: Repository<User>,
     ) {}
 
-    async getAll() {
-        return this.userRepository.find({
-            where: {
-                deleted_at: IsNull(),
+    async getAll(options: IPaginationOptions) {
+        return paginate<User>(
+            this.userRepository,
+            {
+                limit: options.limit || 20,
+                page: options.page || 1,
             },
-        });
+            {
+                where: {
+                    deleted_at: IsNull(),
+                },
+            },
+        );
     }
 
     async createOne(createUserDto: CreateUserDto) {

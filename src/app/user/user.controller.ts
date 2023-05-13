@@ -6,18 +6,20 @@ import {
     Param,
     Patch,
     Post,
+    Query,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { IPaginationOptions } from 'nestjs-typeorm-paginate';
 
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Get('/')
-    getAll() {
-        return this.userService.getAll();
+    getAll(@Query() query: IPaginationOptions) {
+        return this.userService.getAll(query);
     }
 
     @Post('/')
